@@ -4,11 +4,17 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import React from 'react'
 import Dashboard from './Pages/Dashboard'
+import Sidebar from './Components/Sidebar'
 
 function App() {
-  return(
-    <div>
-      <Dashboard />
+  return (
+    <div className='flex'>
+      <Sidebar />
+      <div className="flex-1 p-10">
+        <Dashboard />
+      </div>
+
+
     </div>
   )
 }
