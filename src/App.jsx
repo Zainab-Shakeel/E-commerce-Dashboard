@@ -5,17 +5,22 @@ import './App.css'
 import React from 'react'
 import Dashboard from './Pages/Dashboard'
 import Sidebar from './Components/Sidebar'
+import Products from './Pages/Products'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div className='flex'>
-      <Sidebar />
-      <div className="flex-1 p-10">
-        <Dashboard />
+    <BrowserRouter> 
+      <div className="flex">
+        <Sidebar/>
+        <div className="flex-1 p-10">
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/products" element={<Products />} />
+          </Routes>
+        </div>
       </div>
-
-
-    </div>
+    </BrowserRouter>
   )
 }
 
