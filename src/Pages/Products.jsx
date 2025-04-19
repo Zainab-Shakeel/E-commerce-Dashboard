@@ -29,6 +29,9 @@ function Products() {
     const [editingProduct, seteditingProduct] = useState(null);
     const [showEditModal, setShowEditModal] = useState(false);
 
+    const [viewProduct, setViewProduct] = useState(null);
+    const [showViewModal, setShowViewModal] = useState(false);
+
     const handleEditClick = (product) => {
         seteditingProduct(product)
         setShowEditModal(true);
@@ -38,7 +41,11 @@ function Products() {
         if (confirmDelete) {
             setProducts(products.filter(product => product.id !== id));
         }
+    }
 
+    const handleViewclick = (product) => {
+        setViewProduct(product);
+        setShowViewModal(true);
     }
     return (
         <div>
@@ -51,7 +58,6 @@ function Products() {
                             <th className="px-6 py-4 font-semibold">Category</th>
                             <th className="px-6 py-4 font-semibold">Price</th>
                             <th className="px-6 py-4 font-semibold">Stock</th>
-                            <th className="px-6 py-4 font-semibold">Image</th>
                             <th className="px-6 py-4 font-semibold">Actions</th>
                         </tr>
                     </thead>
@@ -70,7 +76,6 @@ function Products() {
                                         Out of Stock
                                     </span>
                                 )}</td>
-                                <td></td>
                                 <td className="px-6 py-4 flex gap-2 text-white">
                                     <button onClick={() => handleViewclick(product)}>View</button>
                                     <button onClick={() => handleEditClick(product)}>Edit</button>
@@ -120,6 +125,32 @@ function Products() {
                                 </button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            )}
+
+            {/* view modal */}
+            {showViewModal && viewProduct && (
+                <div className="text-black fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                    <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+                        <h2 className="text-xl font-bold mb-4">Product Details</h2>
+                        <div className="space-y-2">
+                            <p><strong>Name: </strong>{viewProduct.name}</p>
+                            <p><strong>Category: </strong>{viewProduct.category}</p>
+                            <p><strong>Price: </strong>{viewProduct.price}</p>
+                            <p><strong>Stock: </strong>{viewProduct.stock >0? 
+                            <span>
+                                In Stock
+                            </span>:
+                            <span>
+                                Out of Stock
+                            </span>}</p>
+                        </div>
+                        <div className="mt-4 flex justify-end">
+                            <button className="text-white px-4 py-2" type="button" onClick={()=> setShowViewModal(false)}>
+                                Cancel
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}
