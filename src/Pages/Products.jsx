@@ -26,9 +26,16 @@ function Products() {
         },
     ]);
 
-    const handleDelete= (id)=>{
+    const [editingProduct, seteditingProduct] = useState(null);
+    const [showEditModal, setShowEditModal] = useState(false);
+
+    const handleEditClick = (product) => {
+        seteditingProduct(product)
+        setShowEditModal(true);
+    }
+    const handleDelete = (id) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this product?");
-        if(confirmDelete){
+        if (confirmDelete) {
             setProducts(products.filter(product => product.id !== id));
         }
 
@@ -65,9 +72,9 @@ function Products() {
                                 )}</td>
                                 <td></td>
                                 <td className="px-6 py-4 flex gap-2 text-white">
-                                    <button onClick={()=>handleViewclick(product)}>View</button>
-                                    <button onClick={()=> handleEditClick(product)}>Edit</button>
-                                    <button onClick={()=> handleDelete(product.id)}>Delete</button>
+                                    <button onClick={() => handleViewclick(product)}>View</button>
+                                    <button onClick={() => handleEditClick(product)}>Edit</button>
+                                    <button onClick={() => handleDelete(product.id)}>Delete</button>
                                 </td>
 
                             </tr>
@@ -75,6 +82,47 @@ function Products() {
                     </tbody>
                 </table>
             </div>
+
+
+            {/* edit button modal */}
+
+            {showEditModal && (
+                <div className="text-black fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                    <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+                        <h2 className="text-xl font-bold mb-4">Edit Product</h2>
+                        <form
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                setProducts((prev) =>
+                                    prev.map((p) =>
+                                        p.id === editingProduct.id ? editingProduct : p
+                                    )
+                                );
+                                setShowEditModal(false);
+                            }}
+                            className="space-y-4"
+                        >
+
+                            <div>
+                                <label className="block mb-1 font-medium">Product Name </label>
+                                <input className="w-full border px-3 py-2 rounded" type="text" value={editingProduct.name} onChange={(e) => seteditingProduct({ ...editingProduct, name: e.target.value })} />
+                            </div>
+                            <div>
+                                <label className="block mb-1 font-medium">Price </label>
+                                <input className="w-full border px-3 py-2 rounded" type="number" value={editingProduct.price} onChange={(e) => seteditingProduct({ ...editingProduct, price: parseFloat(e.target.value) })} />
+                            </div>
+                            <div className="text-white flex justify-end gap-3 p-2">
+                                <button className="px-4 py-2 rounded" type="buton" onClick={() => setShowEditModal(false)}>
+                                    Cancel
+                                </button>
+                                <button type="submit" className="px-4 py-2 rounded">
+                                    Save
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
