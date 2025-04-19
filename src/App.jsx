@@ -6,6 +6,7 @@ import React from 'react'
 import Dashboard from './Pages/Dashboard'
 import Sidebar from './Components/Sidebar'
 import Products from './Pages/Products'
+import Orders from './Pages/Orders'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/orders" element={<Orders />} />
           </Routes>
         </div>
       </div>
