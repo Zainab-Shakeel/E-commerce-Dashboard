@@ -32,6 +32,8 @@ function Products() {
     const [viewProduct, setViewProduct] = useState(null);
     const [showViewModal, setShowViewModal] = useState(false);
 
+    const [searchTerm, setSearchTerm] = useState('');
+
     const handleEditClick = (product) => {
         seteditingProduct(product)
         setShowEditModal(true);
@@ -50,6 +52,15 @@ function Products() {
     return (
         <div>
             <h1 className="text-3xl font-bold mb-6">Products</h1>
+            <div className="mb-4">
+                <input
+                    type="text"
+                    placeholder="Search by name..."
+                    className="w-full max-w-xs border px-4 py-2 rounded"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+            </div>
             <div className="overflow-x-auto bg-white rounded-lg shadow-md text-black">
                 <table className="min-w-full text-left text-sm">
                     <thead className="bg-gray-100">
@@ -62,7 +73,7 @@ function Products() {
                         </tr>
                     </thead>
                     <tbody>
-                        {products.map((product) => (
+                        {products.filter((product) => product.name.toLowerCase().includes(searchTerm.toLowerCase())).map((product) => (
                             <tr key={product.id}>
                                 <td className="px-6 py-4">{product.name}</td>
                                 <td className="px-6 py-4">{product.category}</td>
@@ -138,16 +149,16 @@ function Products() {
                             <p><strong>Name: </strong>{viewProduct.name}</p>
                             <p><strong>Category: </strong>{viewProduct.category}</p>
                             <p><strong>Price: </strong>{viewProduct.price}</p>
-                            <p><strong>Stock: </strong>{viewProduct.stock >0? 
-                            <span>
-                                In Stock
-                            </span>:
-                            <span>
-                                Out of Stock
-                            </span>}</p>
+                            <p><strong>Stock: </strong>{viewProduct.stock > 0 ?
+                                <span>
+                                    In Stock
+                                </span> :
+                                <span>
+                                    Out of Stock
+                                </span>}</p>
                         </div>
                         <div className="mt-4 flex justify-end">
-                            <button className="text-white px-4 py-2" type="button" onClick={()=> setShowViewModal(false)}>
+                            <button className="text-white px-4 py-2" type="button" onClick={() => setShowViewModal(false)}>
                                 Cancel
                             </button>
                         </div>
