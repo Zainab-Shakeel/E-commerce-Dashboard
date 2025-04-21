@@ -17,7 +17,9 @@ function Sidebar() {
         <Link to="/orders" className="block py-2 px-4 hover:bg-gray-100 rounded">
           Orders
         </Link>
-        <li className="hover:bg-gray-700 p-2 rounded">Customers</li>
+        <Link to="/cutomers" className="block py-2 px-4 hover:bg-gray-100 rounded">
+          Customers
+        </Link>
         <li className="hover:bg-gray-700 p-2 rounded">Analytics</li>
       </ul>
     </div>

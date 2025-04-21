@@ -7,6 +7,7 @@ import Dashboard from './Pages/Dashboard'
 import Sidebar from './Components/Sidebar'
 import Products from './Pages/Products'
 import Orders from './Pages/Orders'
+import Customers from './Pages/Cutomers'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/products" element={<Products />} />
             <Route path="/orders" element={<Orders />} />
+            <Route path="/cutomers" element={<Customers />} />
           </Routes>
         </div>
       </div>
